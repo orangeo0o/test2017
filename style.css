@@ -6,5 +6,7 @@ body{
 　font-size:15px;
 　color:#FFEE99;
 　font-weight:bold; 
+  background-image:url(down.jpg);
+  background-size:cover;
 }
 

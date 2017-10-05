@@ -6,11 +6,8 @@ Header{
 　font-size:15px;
 　color:#fffaf3;
 　font-weight:bold;
-　background-color:#f9c81e;
-}
-body{
-  background-size:cover
   background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9lMg8qP2xAomnH4kOpC6od9k_-IqpHvL0tVv8HWr3bLm7WsFR");
+  background-size:cover
   background-attachment:fixed
   
 }

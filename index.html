@@ -12,4 +12,42 @@
   </center>
 測試測試 測測試試
 </body>
+<div>
+    HW2-1
+<script type="text/javascript">
+var h="0"+0;var m="0"+0;var s=10;
+var t;
+
+function timedCount()
+{
+  if (s<10) s="0"+s;
+  document.getElementById('txt').innerHTML=h+":"+m+":"+s
+  if (s<=0) {
+    s=0;
+    form1.submit();
+  }
+  else{
+    t=setTimeout("timedCount()",1000);
+    s=s-1;
+  }
+
+}
+timedCount();
+</script>
+
+
+
+<div onload="timedCount()">
+<div id="txt"></div>
+</div>
+
+<form id="form1" action="http://moeas.ee.ncku.edu.tw:8080/HW2/submitReply.aspx" method="post">
+<input type="radio" name="optradio" value="紅色"> 紅色<br>  
+<input type="radio" name="optradio" value="黃色"> 黃色<br>
+<input type="radio" name="optradio" value="綠色"> 綠色<br> 
+
+<input type ="submit" value="submit">
+</form>
+
+</div>
 

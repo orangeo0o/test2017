@@ -1,2 +1,147 @@
 
-hello
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>HW3_20171215</title>
+    <style>* { padding: 0; margin: 0; } canvas { background: #eee; display: block; margin: 0 auto; }</style>
+</head>
+
+
+  <center><div id="txt"></div></center>
+<body>
+<center><form>
+選擇速度：
+  <select name=selecy onchange="Speedchange(this.options[this.options.selectedIndex].value)">
+  <option value="0"></option>
+　<option value="1">簡單</option>
+　<option value="2">中等</option>
+　<option value="3">困難</option>
+　</select>
+<input type="button" value="開始遊戲！" onClick="timedCount();draw()">
+</form></center>
+<canvas id="myCanvas" width="480" height="320"></canvas>
+
+<script>
+    var h=0;
+    var m=0;
+    var s=0;
+    var t;
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var ballRadius = 10;
+    var x = canvas.width/2;
+    var y = canvas.height-30;
+    var dx = 2;
+    var dy = -2;
+    var paddleHeight = 10;
+    var paddleWidth = 75;
+    var paddleX = (canvas.width-paddleWidth)/2;
+    var rightPressed = false;
+    var leftPressed = false;
+    var lives = 1;
+   
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+    
+    function timedCount()
+    {
+     t=setTimeout("timedCount()",1000);
+     s=s+1;
+     if(s>60) {m=m+1;s=0;}
+     if(m>60) {h=h+1;m=0;}
+     document.getElementById('txt').innerHTML=h+":"+m+":"+s
+     console.log(h+":"+m+":"+s);
+    } 
+    function stopCount() {
+    s=0;
+    setTimeout("document.getElementById('txt').innerHTML=00:00:00",0);
+    clearTimeout(t);
+    }
+    
+    function Speedchange(s){
+      dx = 2*s;
+      dy = -2*s;
+      console.log(dx);
+    }
+  
+    function keyDownHandler(e) {
+        if(e.keyCode == 39) {
+            rightPressed = true;
+        }
+        else if(e.keyCode == 37) {
+            leftPressed = true;
+        }
+    }
+    function keyUpHandler(e) {
+        if(e.keyCode == 39) {
+            rightPressed = false;
+        }
+        else if(e.keyCode == 37) {
+            leftPressed = false;
+        }
+    }
+   
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+    }
+    function drawPaddle() {
+        ctx.beginPath();
+        ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+    }
+  function drawTime() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#0095DD";
+        ctx.fillText(h+":"+m+":"+s, 8, 20);
+    }
+   function draw() {
+        console.log(dx);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
+        drawPaddle();
+        if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+            dx = -dx;
+        }
+        if(y + dy < ballRadius) {
+            dy = -dy;
+        }
+        else if(y + dy > canvas.height-ballRadius) {
+            if(x > paddleX && x < paddleX + paddleWidth) {
+                dy = -dy;
+            }
+            else {
+                lives--;
+                if(!lives) {
+                    alert("GAME OVER");
+                    stopCount();
+                    document.location.reload();
+                }
+                else {
+                    x = canvas.width/2;
+                    y = canvas.height-30;
+                    paddleX = (canvas.width-paddleWidth)/2;
+                }
+            }
+        }
+        if(rightPressed && paddleX < canvas.width-paddleWidth) {
+            paddleX += 7;
+        }
+        else if(leftPressed && paddleX > 0) {
+            paddleX -= 7;
+        }
+        x += dx;
+        y += dy;
+        requestAnimationFrame(draw);
+    }
+
+</script>
+</body>
+</html>
+

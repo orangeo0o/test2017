@@ -1,25 +1,24 @@
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title>HW3_20171215</title>
-    <style>* { padding: 0; margin: 0; } canvas { background: #eee; display: block; margin: 0 auto; }</style>
+    <style> canvas { background: #ddd; display: block; margin: 0 auto; }</style>
 </head>
 
-
-<center><div id="txt"></div></center>
+<center><div id="txt">0:0:0</div></center>
 <body>
-<center><form>
-選擇速度：
+  <center><form>
+  選擇速度：
   <select id=select onchange="Speedchange(this.options[this.options.selectedIndex].value)">
   <option value="0"></option>
 　<option value="1">簡單</option>
 　<option value="2">中等</option>
 　<option value="3">困難</option>
 　</select>
-<input type="button" value="開始遊戲！" id="btn" onClick="ChangeDisabled(1);timedCount();draw()">
-</form></center>
-<canvas id="myCanvas" width="480" height="320"></canvas>
+  <input type="button" value="開始遊戲！" id="btn" onClick="ChangeDisabled(1);timedCount();draw()">
+  </form></center>
+
+  <canvas id="myCanvas" width="350" height="400"></canvas>
 
 <script>
     var h=0;
@@ -128,7 +127,7 @@
             else {
                 lives--;
                 if(!lives) {
-                    alert("GAME OVER");
+                    alert("GAME OVER!!!");
                     stopCount();
                     document.location.reload();
                 }
@@ -151,9 +150,10 @@
     }
 </script>
 </body>
+
 <center><div>
   遊戲方式：方向鍵 ← → 控制 <p>
-  <a href="https://orangeo0o.github.io/test2017/HW3_help.html">[HELP]</a>
+  <a href="https://orangeo0o.github.io/test2017/help.html">[HELP]</a>
 </div></center>
 
 </html>
